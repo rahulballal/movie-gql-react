@@ -1,0 +1,25 @@
+{
+  "name": "movies-gql",
+  "version": "1.0.0",
+  "main": "out/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.11.12",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.3"
+  },
+  "dependencies": {
+    "class-validator": "^0.13.2",
+    "fastify": "^3.24.1",
+    "graphql": "^15.8.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.1.1",
+    "mercurius": "^8.11.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsnd ./src/index.ts",
+    "prestart": "yarn build",
+    "start": "NODE_ENV=production node ."
+  }
+}
