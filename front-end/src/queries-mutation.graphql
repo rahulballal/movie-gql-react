@@ -1,0 +1,17 @@
+query GetAllMovies {
+  movies {
+    name
+    isFlop
+    releaseDate
+    source
+  }
+}
+
+mutation AddMovie($addMovieInput: AddMovieInput!) {
+    addMovie(addMovieInput: $addMovieInput) {
+            name
+    isFlop
+    releaseDate
+    source
+    }
+}

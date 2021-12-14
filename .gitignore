@@ -1,2 +1,5 @@
-gql-backend/node_modules/
-gql-backend/out/
+*/node_modules/
+*/out/
+*/dist/
+*/.parcel-cache
+*/tsconfig.tsbuildinfo
