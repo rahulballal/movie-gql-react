@@ -5,7 +5,7 @@
 
 input AddMovieInput {
   name: String = ""
-  source: String = "Bollywood"
+  source: String = "Not Set"
 }
 
 """
@@ -15,9 +15,15 @@ scalar DateTime
 
 type Movie {
   isFlop: Boolean!
-  name: String
-  releaseDate: DateTime
-  source: String
+  name: String!
+  releaseDate: DateTime!
+  source: MovieSource!
+}
+
+enum MovieSource {
+  BOLLYWOOD
+  HOLLYWOOD
+  UNKNOWN
 }
 
 type Mutation {

@@ -8,6 +8,7 @@ import {
   Mutation,
   ObjectType,
   Query,
+  registerEnumType,
   Resolver,
   Root,
 } from "type-graphql";
@@ -16,20 +17,24 @@ export interface IContext {
   hostName: string;
 }
 
-type MovieSource = "Bollywood" | "Hollywood";
+enum MovieSource {
+  BOLLYWOOD = "Bollywood",
+  HOLLYWOOD = "Hollywood",
+  UNKNOWN = "Not Set",
+}
 
 @ObjectType()
 class Movie {
-  @Field({ defaultValue: "" })
+  @Field({ nullable: false })
   name!: string;
 
-  @Field({ defaultValue: new Date() })
+  @Field({ nullable: false })
   releaseDate!: Date;
 
-  @Field({ defaultValue: "Bollywood" })
-  source!: MovieSource;
+  @Field(() => MovieSource, { nullable: false })
+  source: MovieSource = MovieSource.UNKNOWN;
 
-  @Field()
+  @Field({ nullable: false })
   isFlop!: boolean;
 
   constructor(name: string, releaseDate: Date, source: MovieSource) {
@@ -40,8 +45,8 @@ class Movie {
 }
 
 const db: Array<Movie> = [
-  new Movie("The Batman", new Date(), "Hollywood"),
-  new Movie("The Batman Begins", new Date(), "Hollywood"),
+  new Movie("The Batman", new Date(), MovieSource.HOLLYWOOD),
+  new Movie("The Batman Begins", new Date(), MovieSource.HOLLYWOOD),
 ];
 
 @Resolver()
@@ -63,7 +68,7 @@ class AddMovieInput {
   @Field({ defaultValue: "" })
   name!: string;
 
-  @Field({ defaultValue: "Bollywood" })
+  @Field({ defaultValue: MovieSource.UNKNOWN })
   source!: MovieSource;
 }
 
@@ -86,6 +91,7 @@ export class MovieResolver {
 }
 
 export const getGQLSchema = async () => {
+  registerEnumType(MovieSource, {name: 'MovieSource'})
   return buildSchema({
     resolvers: [QueryResolver, MutationResolver, MovieResolver],
     emitSchemaFile: true,

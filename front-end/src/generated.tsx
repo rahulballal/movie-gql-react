@@ -25,10 +25,16 @@ export type AddMovieInput = {
 export type Movie = {
   __typename?: 'Movie';
   isFlop: Scalars['Boolean'];
-  name?: Maybe<Scalars['String']>;
-  releaseDate?: Maybe<Scalars['DateTime']>;
-  source?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  releaseDate: Scalars['DateTime'];
+  source: MovieSource;
 };
+
+export enum MovieSource {
+  Bollywood = 'BOLLYWOOD',
+  Hollywood = 'HOLLYWOOD',
+  Unknown = 'UNKNOWN'
+}
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -49,14 +55,14 @@ export type Query = {
 export type GetAllMoviesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllMoviesQuery = { __typename?: 'Query', movies: Array<{ __typename?: 'Movie', name?: string | null | undefined, isFlop: boolean, releaseDate?: any | null | undefined, source?: string | null | undefined }> };
+export type GetAllMoviesQuery = { __typename?: 'Query', movies: Array<{ __typename?: 'Movie', name: string, isFlop: boolean, releaseDate: any, source: MovieSource }> };
 
 export type AddMovieMutationVariables = Exact<{
   addMovieInput: AddMovieInput;
 }>;
 
 
-export type AddMovieMutation = { __typename?: 'Mutation', addMovie: { __typename?: 'Movie', name?: string | null | undefined, isFlop: boolean, releaseDate?: any | null | undefined, source?: string | null | undefined } };
+export type AddMovieMutation = { __typename?: 'Mutation', addMovie: { __typename?: 'Movie', name: string, isFlop: boolean, releaseDate: any, source: MovieSource } };
 
 
 export const GetAllMoviesDocument = gql`
