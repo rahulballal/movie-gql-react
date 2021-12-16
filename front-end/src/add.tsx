@@ -16,6 +16,7 @@ export const AddMovie: React.FC<IAddMovieProps> = (props) => {
     React.useState<Movie>(defaultState);
   const handleClick = () => {
     props.submit({ name, source });
+    setFormState(defaultState)
   };
   return (
     <div>
@@ -23,7 +24,7 @@ export const AddMovie: React.FC<IAddMovieProps> = (props) => {
       <input
         type="text"
         value={name}
-        onBlur={(e) => {
+        onChange={(e) => {
           const val = e.target.value;
           setFormState((value) => Object.assign({}, value, { name: val }));
         }}

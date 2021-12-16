@@ -5,7 +5,7 @@
 
 input AddMovieInput {
   name: String = ""
-  source: String = "Not Set"
+  source: String = "UNKNOWN"
 }
 
 """

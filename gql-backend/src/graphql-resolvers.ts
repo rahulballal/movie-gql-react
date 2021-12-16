@@ -18,9 +18,9 @@ export interface IContext {
 }
 
 enum MovieSource {
-  BOLLYWOOD = "Bollywood",
-  HOLLYWOOD = "Hollywood",
-  UNKNOWN = "Not Set",
+  BOLLYWOOD = "BOLLYWOOD",
+  HOLLYWOOD = "HOLLYWOOD",
+  UNKNOWN = "UNKNOWN",
 }
 
 @ObjectType()
@@ -86,7 +86,7 @@ export class MutationResolver {
 export class MovieResolver {
   @FieldResolver()
   isFlop(@Root() parentMovie: Movie) {
-    return parentMovie.source === "Hollywood" ? true : false;
+    return parentMovie.source === MovieSource.HOLLYWOOD ? true : false;
   }
 }
 
